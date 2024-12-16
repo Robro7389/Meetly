@@ -9,11 +9,9 @@ import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import MeetingCard from './MeetingCard'
 import Loader from './Loader'
-import { useToast } from '@/hooks/use-toast'
 
 
 const CallList = ({ type }: {type: 'ended' | 'upcoming' | 'recordings'}) => {
-    const { toast } = useToast();
     const { endedCalls, upcomingCalls, callRecordings, isLoading } = useGetCalls()
     const router = useRouter();
     const [recordings, setRecordings] = useState<CallRecording>([])
@@ -53,7 +51,7 @@ const CallList = ({ type }: {type: 'ended' | 'upcoming' | 'recordings'}) => {
             const recordings = callData.filter(call.recordings.length > 0).flatMap(call => call.recordings)
             setRecordings(recordings);
         } catch (error) {
-            toast({ title:"Try Again Later."})
+            console.log(error)
         }
       }
 
